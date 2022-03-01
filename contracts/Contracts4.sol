@@ -10,6 +10,9 @@ contract Storage {
 // TODO: ensure the Hero can still superCharge, but can't be hacked!
 contract Hero is Storage {
     constructor(address _owner, address _behavior) {
+
+        owner = _owner;
+        
         behavior = _behavior;
         (bool success, ) = behavior.delegatecall(abi.encodeWithSignature(
             "initialize(address)", _owner
@@ -29,7 +32,9 @@ contract Hero is Storage {
 
 contract Behavior is Storage {
     // just a constructor function 
+
     function initialize(address _owner) external {
+        require(msg.sender == owner);
         owner = _owner;
     }
 

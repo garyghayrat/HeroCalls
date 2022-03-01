@@ -45,7 +45,11 @@ contract GoodFriend {
 // the Hero would never call this contract 
 // but are we safe from the bad friend? 
 contract BadFriend {
-    function sayHello() external {
+    function sayHello() external{
+        selfdestruct(payable(address(this)));
+        // bytes memory payload = abi.encodeWithSignature("setFriend(address)", 0);
+        // (bool success, ) = msg.sender.delegatecall(payload);
+
         // TODO: if the behavior contract called this contract directly
         // what could stop the Hero from saying Hello to the Good Friend?
     }

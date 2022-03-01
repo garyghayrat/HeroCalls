@@ -1,9 +1,13 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.7.5;
 
+interface Interface {
+    function alert(uint, bool) external;
+}
+
 contract Sidekick {
     function sendAlert(address hero, uint enemies, bool armed) external {
-        // TODO: alert the hero! 
+        Interface(hero).alert(enemies, armed);// TODO: alert the hero! 
     }
 }
 
